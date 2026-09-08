@@ -1,0 +1,7 @@
+ReCAP: Receding Context with Anchor Preservation
+Copyright 2026 ReCAP contributors
+
+Original ReCAP additions are licensed under Apache-2.0.
+Bundled upstream code retains its original licenses. See THIRD_PARTY_NOTICES.md
+and third_party/ for attribution and complete license texts.
+Dataset images and model checkpoints are not covered by the software license.

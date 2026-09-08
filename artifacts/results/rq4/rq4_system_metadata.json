@@ -1,0 +1,44 @@
+{
+  "status": "complete",
+  "main_system_condition": "APC off, one persistent vLLM engine, exclusive H20",
+  "software": {
+    "python": "3.13.11",
+    "torch": "2.9.1",
+    "torch_cuda": "12.9",
+    "transformers": "4.57.1",
+    "vllm": "0.13.0",
+    "gpu": "NVIDIA H20",
+    "cuda_visible_devices": "2"
+  },
+  "kv_bytes_per_token": 36864,
+  "logical_kv_note": "excludes block rounding, allocator metadata, activations and workspace",
+  "nvml_note": "vLLM preallocates the KV pool; NVML device memory is not interpreted as active KV bytes",
+  "single_stream_cases": {
+    "RT-1": "train_eps_00000000",
+    "CALVIN": "C01",
+    "LIBERO-90": "L011"
+  },
+  "concurrency_prompt_source": "distinct token-typed synthetic prompts at exact observed H64 lengths",
+  "concurrency_max_tested": 256,
+  "concurrency_failures": [],
+  "tokenizer_8frame_p50_ms": {
+    "RT-1": {
+      "encode": 46.98533,
+      "decode": 80.720677
+    },
+    "CALVIN": {
+      "encode": 46.868203,
+      "decode": 80.517932
+    },
+    "LIBERO-90": {
+      "encode": 46.971831,
+      "decode": 80.705137
+    }
+  },
+  "w_pareto_cases_per_dataset": 4,
+  "limitations": [
+    "snapshot concurrency uses distinct token-typed prompts at measured lengths and is a systems microbenchmark, not a quality experiment",
+    "H80/H100 Full Context is truncated to the 7900-token prompt cap",
+    "no OOM observed up to concurrency 256; report saturation rather than claiming a hard maximum"
+  ]
+}

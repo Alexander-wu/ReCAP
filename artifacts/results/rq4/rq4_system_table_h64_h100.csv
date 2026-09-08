@@ -1,0 +1,5 @@
+method,horizon,full_context_status,active_prompt_tokens,logical_tokens_before_truncation,logical_kv_mib,latency_ms_p50_macro_mean,latency_ms_p50_min,latency_ms_p50_max,latency_ms_p95_macro_mean,datasets,gpu,vllm,cache_mode
+Full context,64,not truncated,7232,7232,254.25,312.953204,311.591038,313.859986,319.001763,3,NVIDIA H20,0.13.0,off
+ReCAP W=6,64,bounded,1931,1931,67.886719,292.569144,291.644392,294.123116,293.391973,3,NVIDIA H20,0.13.0,off
+Full context,100,truncated to 7900,7900,10580,277.734375,314.919598,314.386712,315.302538,318.868249,3,NVIDIA H20,0.13.0,off
+ReCAP W=6,100,bounded,1931,1931,67.886719,292.484363,291.246023,294.617062,293.386257,3,NVIDIA H20,0.13.0,off

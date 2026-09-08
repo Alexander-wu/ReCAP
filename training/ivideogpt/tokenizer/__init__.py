@@ -1,0 +1,1 @@
+from .vq_model import CNNFSQModel256

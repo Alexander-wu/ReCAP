@@ -1,0 +1,290 @@
+#!/usr/bin/env python3
+"""Sequential LIBERO-90 tokenizer adaptation and world-model fine-tuning.
+
+The full pipeline runs on one Ray allocation so node-local /tmp assets and the
+new Stage-1 tokenizer are guaranteed to remain visible to Stage 2.
+"""
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+REPO = Path("<DATA_OR_CACHE>/ivideogpt")
+DATA_ROOT = Path("<DATA_OR_CACHE>/libero_npz")
+DATASET = "libero_90"
+DATA_DIR = DATA_ROOT / DATASET
+OFFICIAL_TOKENIZER = Path("<DATA_OR_CACHE>/tokenizer")
+SEED = Path("<DATA_OR_CACHE>/checkpoint_0")
+RUNS_ROOT = Path("<DATA_OR_CACHE>/libero_two_stage_runs")
+SEED_VALUE = "20260903"
+
+PRESETS = {
+    "smoke": {
+        "processes": 1,
+        "tokenizer_steps": 20,
+        "tokenizer_checkpoint": 20,
+        "tokenizer_validation": 100000,
+        "tokenizer_log": 1,
+        "tokenizer_images": 100000,
+        "tokenizer_workers": 1,
+        "world_steps": 20,
+        "world_checkpoint": 20,
+        "world_validation": 20,
+        "world_log": 1,
+        "world_workers": 1,
+        "max_eval_iters": 1,
+    },
+    "full": {
+        "processes": 8,
+        "tokenizer_steps": 20000,
+        "tokenizer_checkpoint": 1000,
+        "tokenizer_validation": 1000,
+        "tokenizer_log": 20,
+        "tokenizer_images": 1000,
+        "tokenizer_workers": 2,
+        "world_steps": 20000,
+        "world_checkpoint": 1000,
+        "world_validation": 1000,
+        "world_log": 20,
+        "world_workers": 2,
+        "max_eval_iters": 2,
+    },
+}
+
+
+def require(paths):
+    missing = [str(path) for path in paths if not path.exists()]
+    if missing:
+        raise SystemExit("missing prerequisites:\n  " + "\n  ".join(missing))
+
+
+def run(command, cwd):
+    print("LIBERO_COMMAND=" + json.dumps(command), flush=True)
+    return subprocess.call(command, cwd=cwd, env=os.environ.copy())
+
+
+def run_streaming(command, cwd):
+    """Stream child output while retaining enough text to classify known cleanup errors."""
+    print("LIBERO_COMMAND=" + json.dumps(command), flush=True)
+    process = subprocess.Popen(
+        command,
+        cwd=cwd,
+        env=os.environ.copy(),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1,
+    )
+    tail = []
+    assert process.stdout is not None
+    for line in process.stdout:
+        print(line, end="", flush=True)
+        tail.append(line)
+        if len(tail) > 400:
+            tail = tail[-400:]
+    return process.wait(), "".join(tail)
+
+
+def accelerate_prefix(processes):
+    command = [sys.executable, "-m", "accelerate.commands.accelerate_cli", "launch"]
+    if processes > 1:
+        command += ["--multi_gpu"]
+    return command + ["--num_processes", str(processes)]
+
+
+def find_tokenizer(output_root, step):
+    matches = sorted(output_root.glob(
+        f"**/checkpoint-tokenizer{step}/unwrapped_model/diffusion_pytorch_model.safetensors"
+    ))
+    if len(matches) != 1:
+        raise RuntimeError(f"expected one tokenizer checkpoint at step {step}, found {matches}")
+    model_dir = matches[0].parent
+    require([model_dir / "config.json", model_dir / "diffusion_pytorch_model.safetensors"])
+    return model_dir
+
+
+def find_world_checkpoint(output_root, step):
+    matches = sorted(output_root.glob(f"**/checkpoints/checkpoint_{step}/model.safetensors"))
+    if len(matches) != 1:
+        raise RuntimeError(f"expected one world checkpoint at step {step}, found {matches}")
+    checkpoint = matches[0].parent
+    require([
+        checkpoint / "model.safetensors",
+        checkpoint / "model_1.safetensors",
+        checkpoint / "optimizer.bin",
+        checkpoint / "scheduler.bin",
+        checkpoint / "random_states_0.pkl",
+    ])
+    return checkpoint
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("mode", choices=sorted(PRESETS))
+    parser.add_argument("--run-id", default=None)
+    parser.add_argument("--start-stage", choices=("tokenizer", "world"), default="tokenizer")
+    parser.add_argument("--tokenizer", default=None,
+                        help="required only with --start-stage world")
+    args = parser.parse_args()
+    preset = PRESETS[args.mode]
+    run_id = args.run_id or time.strftime("%Y%m%d-%H%M%S")
+    run_root = RUNS_ROOT / run_id
+    tokenizer_output = run_root / "tokenizer"
+    world_output = run_root / "world"
+    if run_root.exists() and any(run_root.iterdir()):
+        raise SystemExit(f"refusing non-empty run directory: {run_root}")
+    tokenizer_output.mkdir(parents=True, exist_ok=True)
+    world_output.mkdir(parents=True, exist_ok=True)
+
+    require([
+        REPO / "train_ctx_tokenizer.py",
+        REPO / "train_vgpt.py",
+        OFFICIAL_TOKENIZER / "config.json",
+        OFFICIAL_TOKENIZER / "diffusion_pytorch_model.safetensors",
+        DATA_DIR / "manifest.json",
+        DATA_DIR / "train_eps_00000000.npz",
+        DATA_DIR / "val_eps_00000000.npz",
+        DATA_DIR / "action_ranges.pth",
+        SEED / "model.safetensors",
+        SEED / "model_1.safetensors",
+        SEED / "optimizer.bin",
+        SEED / "scheduler.bin",
+        SEED / "random_states_0.pkl",
+    ])
+
+    for patch_script in (
+        "patch_tokenizer_finetune.py",
+        "patch_libero_dataset.py",
+    ):
+        patch_path = Path(__file__).resolve().parent / patch_script
+        require([patch_path])
+        code = run([sys.executable, str(patch_path), "--repo", str(REPO)], REPO)
+        if code != 0:
+            raise SystemExit(code)
+
+    versions = {"python": sys.executable, "mode": args.mode, "run_id": run_id}
+    for name in ("torch", "imageio", "piqa", "lpips", "accelerate", "diffusers"):
+        module = __import__(name)
+        versions[name] = getattr(module, "__version__", "ok")
+    print("LIBERO_PIPELINE_RUNTIME=" + json.dumps(versions), flush=True)
+    print("LIBERO_PIPELINE_ROOT=" + str(run_root), flush=True)
+
+    if args.start_stage == "tokenizer":
+        tokenizer_command = accelerate_prefix(preset["processes"]) + [
+            "train_ctx_tokenizer.py",
+            "--pretrained_model_name_or_path", str(OFFICIAL_TOKENIZER),
+            "--dataset_path", str(DATA_ROOT),
+            "--oxe_data_mixes_type", DATASET,
+            "--model_type", "ctx_vqganv64",
+            "--resolution", "256", "320",
+            "--segment_length", "8",
+            "--context_length", "1",
+            "--train_batch_size", "1",
+            "--gradient_accumulation_steps", "1",
+            "--learning_rate", "5e-6",
+            "--discr_learning_rate", "5e-6",
+            "--lr_scheduler", "cosine",
+            "--lr_warmup_steps", "1000" if args.mode == "full" else "0",
+            "--disc_start", "10000000",
+            "--disc_weight", "0.0",
+            "--balanced_loss",
+            "--no_aug",
+            "--max_train_steps", str(preset["tokenizer_steps"]),
+            "--checkpointing_steps", str(preset["tokenizer_checkpoint"]),
+            "--validation_steps", str(preset["tokenizer_validation"]),
+            "--skip_first_val",
+            "--log_steps", str(preset["tokenizer_log"]),
+            "--log_image_steps", str(preset["tokenizer_images"]),
+            "--dataloader_num_workers", str(preset["tokenizer_workers"]),
+            "--mixed_precision", "bf16",
+            "--allow_tf32",
+            "--seed", SEED_VALUE,
+            "--output_dir", str(tokenizer_output),
+            "--exp_name", f"libero_90_tokenizer_stage1_{preset['tokenizer_steps']}",
+        ]
+        code = run(tokenizer_command, REPO)
+        if code != 0:
+            raise SystemExit(code)
+        tokenizer = find_tokenizer(tokenizer_output, preset["tokenizer_steps"])
+    else:
+        if not args.tokenizer:
+            raise SystemExit("--tokenizer is required with --start-stage world")
+        tokenizer = Path(args.tokenizer)
+        require([tokenizer / "config.json", tokenizer / "diffusion_pytorch_model.safetensors"])
+
+    print("LIBERO_TOKENIZER_SELECTED=" + str(tokenizer), flush=True)
+
+    world_command = accelerate_prefix(preset["processes"]) + [
+        "train_vgpt.py",
+        "--exp_name", f"libero_90_wm_stage2_{preset['world_steps']}_tokenizer",
+        "--dataset_path", str(DATA_ROOT),
+        "--oxe_data_mixes_type", DATASET,
+        "--config_name", "configs/vgpt/ctx_llama_small.json",
+        "--pretrained_model_name_or_path", str(tokenizer),
+        "--action_ranges_path", str(DATA_DIR / "action_ranges.pth"),
+        "--resume_from_checkpoint", str(SEED),
+        "--processor_type", "ctx_msp",
+        "--segment_length", "8",
+        "--per_device_train_batch_size", "1",
+        "--learning_rate", "1e-5",
+        "--max_train_steps", str(preset["world_steps"]),
+        "--output_dir", str(world_output),
+        "--mixed_precision", "bf16",
+        "--no_aug",
+        "--dataloader_num_workers", str(preset["world_workers"]),
+        "--log_steps", str(preset["world_log"]),
+        "--max_eval_iters", str(preset["max_eval_iters"]),
+        "--validation_steps", str(preset["world_validation"]),
+        "--checkpointing_steps", str(preset["world_checkpoint"]),
+        "--max_generate_batchsize", "1",
+        "--max_decode_batchsize", "1",
+        "--seed", SEED_VALUE,
+    ]
+    code, world_tail = run_streaming(world_command, REPO)
+    try:
+        world_checkpoint = find_world_checkpoint(world_output, preset["world_steps"])
+    except Exception:
+        if code != 0:
+            raise SystemExit(code)
+        raise
+    if code != 0:
+        known_cleanup_error = "Default process group has not been initialized" in world_tail
+        if not known_cleanup_error:
+            raise SystemExit(
+                f"stage 2 exited {code} after checkpoint save, but the error was not the known cleanup barrier"
+            )
+        print(
+            "LIBERO_STAGE2_ACCEPTED_WITH_CLEANUP_ERROR=" + json.dumps({
+                "exit_code": code,
+                "checkpoint": str(world_checkpoint),
+                "reason": "final checkpoint is complete and the only retained failure is the known post-validation process-group cleanup barrier",
+            }),
+            flush=True,
+        )
+
+    result = {
+        "status": "ok",
+        "mode": args.mode,
+        "run_id": run_id,
+        "dataset": str(DATA_DIR),
+        "action_ranges": str(DATA_DIR / "action_ranges.pth"),
+        "official_tokenizer": str(OFFICIAL_TOKENIZER),
+        "world_seed": str(SEED),
+        "tokenizer": str(tokenizer),
+        "world_checkpoint": str(world_checkpoint),
+        "tokenizer_steps": preset["tokenizer_steps"],
+        "world_steps": preset["world_steps"],
+        "seed": int(SEED_VALUE),
+    }
+    (run_root / "pipeline_result.json").write_text(
+        json.dumps(result, indent=2), encoding="utf-8")
+    print("LIBERO_WORLD_CHECKPOINT=" + str(world_checkpoint), flush=True)
+    print("LIBERO_PIPELINE_RESULT=" + json.dumps(result), flush=True)
+
+
+if __name__ == "__main__":
+    main()

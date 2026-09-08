@@ -1,0 +1,62 @@
+{
+  "status": "complete",
+  "h64": {
+    "full_tokens": 7232,
+    "recap_tokens": 1931,
+    "token_reduction_pct": 73.299,
+    "full_kv_mib": 254.25,
+    "recap_kv_mib": 67.886719,
+    "kv_reduction_pct": 73.299,
+    "latency_full_ms": 312.953204,
+    "latency_recap_ms": 292.569144,
+    "latency_reduction_pct": 6.513
+  },
+  "h100": {
+    "full_status": "truncated",
+    "full_effective_tokens": 7900,
+    "full_logical_tokens": 10580,
+    "recap_tokens": 1931,
+    "latency_full_ms": 314.919598,
+    "latency_recap_ms": 292.484363
+  },
+  "concurrency": {
+    "1": {
+      "full_visual_tokens_s": 255.797133,
+      "recap_visual_tokens_s": 272.84159,
+      "speedup": 1.067
+    },
+    "8": {
+      "full_visual_tokens_s": 1277.350369,
+      "recap_visual_tokens_s": 1868.400125,
+      "speedup": 1.463
+    },
+    "32": {
+      "full_visual_tokens_s": 1765.793414,
+      "recap_visual_tokens_s": 5195.223596,
+      "speedup": 2.942
+    },
+    "64": {
+      "full_visual_tokens_s": 1778.543187,
+      "recap_visual_tokens_s": 6352.622386,
+      "speedup": 3.572
+    },
+    "128": {
+      "full_visual_tokens_s": 1723.914478,
+      "recap_visual_tokens_s": 6774.065641,
+      "speedup": 3.929
+    },
+    "256": {
+      "full_visual_tokens_s": 1596.290616,
+      "recap_visual_tokens_s": 6833.547779,
+      "speedup": 4.281
+    }
+  },
+  "w_sweep": {
+    "best_lpips_auc": {
+      "RT-1": "W=6",
+      "CALVIN": "W=4",
+      "LIBERO-90": "W=4"
+    },
+    "note": "n=4 representative cases per dataset"
+  }
+}

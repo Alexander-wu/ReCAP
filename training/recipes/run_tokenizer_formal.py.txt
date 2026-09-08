@@ -1,0 +1,69 @@
+#!/usr/bin/env python
+"""Launch stage-1 formal CALVIN tokenizer adaptation on all eight H20 GPUs.
+
+This is a full adaptation run: 20k generator updates, discriminator off,
+5e-6 peak LR with 5% warmup and cosine decay. Checkpoints are written every 1k
+steps so reconstruction and code utilization can be audited throughout
+training. All data is the complete converted CALVIN D split.
+"""
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+repo = Path("<DATA_OR_CACHE>/ivideogpt")
+data = Path("<DATA_OR_CACHE>/calvin_d")
+required = [
+    repo / "train_ctx_tokenizer.py",
+    Path("<DATA_OR_CACHE>/config.json"),
+    data / "manifest.json",
+    data / "train_eps_00000000.npz",
+    data / "val_eps_00000000.npz",
+]
+missing = [str(path) for path in required if not path.exists()]
+if missing:
+    raise SystemExit("missing prerequisites:\n  " + "\n  ".join(missing))
+
+versions = {"python": sys.executable}
+for name in ("torch", "diffusers", "accelerate", "lpips"):
+    module = __import__(name)
+    versions[name] = getattr(module, "__version__", "ok")
+print("TOKENIZER_FORMAL_RUNTIME=" + json.dumps(versions), flush=True)
+
+command = [
+    sys.executable, "-m", "accelerate.commands.accelerate_cli", "launch",
+    "--multi_gpu", "--num_processes", "8",
+    "train_ctx_tokenizer.py",
+    "--pretrained_model_name_or_path", "<DATA_OR_CACHE>/tokenizer",
+    "--dataset_path", "<DATA_OR_CACHE>/calvin_npz",
+    "--oxe_data_mixes_type", "calvin_d",
+    "--model_type", "ctx_vqganv64",
+    "--resolution", "256", "320",
+    "--segment_length", "8",
+    "--context_length", "1",
+    "--train_batch_size", "1",
+    "--gradient_accumulation_steps", "1",
+    "--learning_rate", "5e-6",
+    "--discr_learning_rate", "5e-6",
+    "--lr_scheduler", "cosine",
+    "--lr_warmup_steps", "1000",
+    "--disc_start", "10000000",
+    "--disc_weight", "0.0",
+    "--balanced_loss",
+    "--no_aug",
+    "--max_train_steps", "20000",
+    "--checkpointing_steps", "1000",
+    "--validation_steps", "1000",
+    "--skip_first_val",
+    "--log_steps", "20",
+    "--log_image_steps", "1000",
+    "--dataloader_num_workers", "2",
+    "--mixed_precision", "bf16",
+    "--allow_tf32",
+    "--seed", "20260903",
+    "--output_dir", "<DATA_OR_CACHE>/calvin_tokenizer_finetune",
+    "--exp_name", "calvin_d_tokenizer_stage1_20k",
+]
+print("TOKENIZER_FORMAL_COMMAND=" + json.dumps(command), flush=True)
+raise SystemExit(subprocess.call(command, cwd=repo, env=os.environ.copy()))

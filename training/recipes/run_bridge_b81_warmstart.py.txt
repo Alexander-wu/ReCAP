@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""Run the RoboAlign-R1 B.8.1 tokenizer recipe from the RT-1 checkpoint.
+
+This is an isolated Stage-1-only experiment. It intentionally does not launch
+world-model training and never writes into the previous Bridge 100k run.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+
+REPO = Path("<DATA_OR_CACHE>/ivideogpt")
+DATA_ROOT = Path("<DATA_OR_CACHE>/bridge_npz")
+DATA_DIR = DATA_ROOT / "bridge_v2"
+RT1_TOKENIZER = Path("<DATA_OR_CACHE>/tokenizer")
+RUNS_ROOT = Path("<DATA_OR_CACHE>/bridge_b81_warmstart_runs")
+
+RUN_ID = "bridge-b81-rt1-init-lr5e5-20260906"
+SEED = "20260906"
+STEPS = 60_000
+LEARNING_RATE = "5e-5"
+
+
+def require(paths):
+    missing = [str(path) for path in paths if not path.exists()]
+    if missing:
+        raise SystemExit("missing prerequisites:\n  " + "\n  ".join(missing))
+
+
+def run(command, cwd):
+    print("BRIDGE_B81_COMMAND=" + json.dumps(command), flush=True)
+    return subprocess.call(command, cwd=cwd, env=os.environ.copy())
+
+
+def main():
+    run_root = RUNS_ROOT / RUN_ID
+    output_root = run_root / "tokenizer"
+    if run_root.exists() and any(run_root.iterdir()):
+        raise SystemExit(f"refusing non-empty run directory: {run_root}")
+    output_root.mkdir(parents=True, exist_ok=True)
+
+    patch = Path(__file__).resolve().parent / "patch_tokenizer_finetune.py"
+    require(
+        [
+            patch,
+            REPO / "train_ctx_tokenizer.py",
+            DATA_DIR / "manifest.json",
+            RT1_TOKENIZER / "config.json",
+            RT1_TOKENIZER / "diffusion_pytorch_model.safetensors",
+        ]
+    )
+    if run([sys.executable, str(patch), "--repo", str(REPO)], REPO) != 0:
+        raise SystemExit("failed to prepare tokenizer trainer")
+
+    config = {
+        "status": "starting",
+        "run_id": RUN_ID,
+        "initialization": str(RT1_TOKENIZER),
+        "recipe": "RoboAlign-R1 Appendix B.8.1 warm-start variant",
+        "learning_rate_generator": float(LEARNING_RATE),
+        "learning_rate_discriminator": float(LEARNING_RATE),
+        "paper_learning_rate": 5e-4,
+        "steps": STEPS,
+        "disc_start": 10_000,
+        "disc_weight": 0.1,
+        "disc_depth": 6,
+        "per_gpu_batch": 1,
+        "gradient_accumulation": 4,
+        "effective_batch": 32,
+        "augmentation": {
+            "brightness_contrast_saturation": [0.9, 1.1],
+            "hue": [-0.05, 0.05],
+            "random_resized_crop_scale": [0.8, 1.0],
+            "random_resized_crop_ratio": [1.0, 1.4],
+        },
+        "checkpoint_every": 2000,
+        "validation_every": 1000,
+        "validation_batches": 100,
+        "world_model_autostart": False,
+        "created_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+    }
+    (run_root / "run_config.json").write_text(json.dumps(config, indent=2), encoding="utf-8")
+    print("BRIDGE_B81_CONFIG=" + json.dumps(config, sort_keys=True), flush=True)
+
+    command = [
+        sys.executable,
+        "-m",
+        "accelerate.commands.accelerate_cli",
+        "launch",
+        "--multi_gpu",
+        "--num_processes",
+        "8",
+        "train_ctx_tokenizer.py",
+        "--pretrained_model_name_or_path",
+        str(RT1_TOKENIZER),
+        "--dataset_path",
+        str(DATA_ROOT),
+        "--oxe_data_mixes_type",
+        "bridge_v2",
+        "--model_type",
+        "ctx_vqganv64",
+        "--resolution",
+        "256",
+        "320",
+        "--segment_length",
+        "8",
+        "--context_length",
+        "1",
+        "--train_batch_size",
+        "1",
+        "--gradient_accumulation_steps",
+        "4",
+        "--gradient_checkpointing",
+        "--learning_rate",
+        LEARNING_RATE,
+        "--discr_learning_rate",
+        LEARNING_RATE,
+        "--lr_scheduler",
+        "cosine",
+        "--discr_lr_scheduler",
+        "constant_with_warmup",
+        "--lr_warmup_steps",
+        "5000",
+        "--disc_start",
+        "10000",
+        "--disc_weight",
+        "0.1",
+        "--disc_depth",
+        "6",
+        "--recon_weight",
+        "1.0",
+        "--perc_weight",
+        "1.0",
+        "--max_train_steps",
+        str(STEPS),
+        "--checkpointing_steps",
+        "2000",
+        "--validation_steps",
+        "1000",
+        "--log_steps",
+        "50",
+        "--log_image_steps",
+        "1000",
+        "--dataloader_num_workers",
+        "4",
+        "--mixed_precision",
+        "bf16",
+        "--allow_tf32",
+        "--seed",
+        SEED,
+        "--output_dir",
+        str(output_root),
+        "--exp_name",
+        RUN_ID,
+    ]
+    code = run(command, REPO)
+    config["status"] = "succeeded" if code == 0 else "failed"
+    config["exit_code"] = code
+    config["finished_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    (run_root / "run_config.json").write_text(json.dumps(config, indent=2), encoding="utf-8")
+    raise SystemExit(code)
+
+
+if __name__ == "__main__":
+    main()

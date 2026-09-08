@@ -1,0 +1,1 @@
+from .compressive_vq_model_fsq import CompressiveVQModelFSQ

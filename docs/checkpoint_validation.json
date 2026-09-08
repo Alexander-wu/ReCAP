@@ -1,0 +1,55 @@
+{
+  "device": "cpu",
+  "files_verified": 36,
+  "models": [
+    {
+      "name": "rt1_world",
+      "strict_load": true,
+      "parameters": 127101696,
+      "forward_finite": true,
+      "vocab_size": 9008
+    },
+    {
+      "name": "rt1_tokenizer",
+      "strict_load": true,
+      "parameters": 129448016
+    },
+    {
+      "name": "calvin_world",
+      "strict_load": true,
+      "parameters": 127101696,
+      "forward_finite": true,
+      "vocab_size": 9008
+    },
+    {
+      "name": "calvin_tokenizer",
+      "strict_load": true,
+      "parameters": 129448016
+    },
+    {
+      "name": "libero_world",
+      "strict_load": true,
+      "parameters": 127101696,
+      "forward_finite": true,
+      "vocab_size": 9008
+    },
+    {
+      "name": "libero_tokenizer",
+      "strict_load": true,
+      "parameters": 129448016
+    },
+    {
+      "name": "bridge_world",
+      "strict_load": true,
+      "parameters": 127101696,
+      "forward_finite": true,
+      "vocab_size": 9008
+    },
+    {
+      "name": "bridge_tokenizer",
+      "strict_load": true,
+      "parameters": 129448016
+    }
+  ],
+  "scope": "Strict state-dict loading, world forward and range contracts; no GPU rollout"
+}

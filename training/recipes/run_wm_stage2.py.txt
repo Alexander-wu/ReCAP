@@ -1,0 +1,126 @@
+#!/usr/bin/env python
+"""Stage 2: fine-tune the multi-step world model on top of the adapted tokenizer.
+
+The tokenizer selected by the fixed-protocol sweep (20k checkpoint: 30.14 dB PSNR
+vs the official model's 17.06 dB) is frozen here and only supplies image tokens.
+The transformer itself still starts from the released RT-1 world model via the
+accelerate seed checkpoint, so the comparison against the frozen-tokenizer branch
+stays fair: only the visual representation differs.
+
+Uses `sys.executable -m accelerate...` rather than the `accelerate` console script
+or a login shell, because both resolve back to the base Conda Python and silently
+escape Ray's isolated pip environment.
+
+Two modes:
+  smoke  - one GPU, 60 steps, proves the adapted tokenizer loads and loss falls
+  full   - eight GPUs, long schedule, the actual stage-2 run
+"""
+import argparse
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+REPO = Path("<DATA_OR_CACHE>/ivideogpt")
+SEED = Path("<DATA_OR_CACHE>/checkpoint_0")
+TOKENIZER_20K = Path(
+    "<DATA_OR_CACHE>/2026-09-03-05:13-calvin_d_tokenizer_stage1_20k"
+    "/checkpoint-tokenizer20000/unwrapped_model")
+
+PRESETS = {
+    # Smoke keeps the tiny converted subset so a failure is fast and cheap.
+    "smoke": {
+        "data_root": Path("<DATA_OR_CACHE>/calvin_npz_smoke"),
+        "dataset": "calvin_d_smoke",
+        "processes": 1,
+        "max_train_steps": 60,
+        "validation_steps": 60,
+        "checkpointing_steps": 60,
+        "log_steps": 1,
+        "output": Path("<DATA_OR_CACHE>/calvin_wm_stage2_smoke"),
+        "exp_name": "calvin_wm_stage2_smoke",
+    },
+    "full": {
+        "data_root": Path("<DATA_OR_CACHE>/calvin_npz"),
+        "dataset": "calvin_d",
+        "processes": 8,
+        "max_train_steps": 20000,
+        "validation_steps": 1000,
+        "checkpointing_steps": 1000,
+        "log_steps": 20,
+        "output": Path("<DATA_OR_CACHE>/calvin_wm_stage2"),
+        "exp_name": "calvin_wm_stage2_20k_tokenizer",
+    },
+}
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("mode", choices=sorted(PRESETS))
+    parser.add_argument("--tokenizer", default=str(TOKENIZER_20K),
+                        help="frozen tokenizer supplying image tokens")
+    parser.add_argument("--learning-rate", default="1e-5")
+    args = parser.parse_args()
+    preset = PRESETS[args.mode]
+
+    tokenizer = Path(args.tokenizer)
+    ranges = preset["data_root"] / preset["dataset"] / "action_ranges.pth"
+    required = [
+        REPO / "train_vgpt.py",
+        ranges,
+        SEED / "model.safetensors",
+        SEED / "optimizer.bin",
+        SEED / "scheduler.bin",
+        SEED / "random_states_0.pkl",
+        tokenizer / "config.json",
+        tokenizer / "diffusion_pytorch_model.safetensors",
+    ]
+    missing = [str(path) for path in required if not path.exists()]
+    if missing:
+        raise SystemExit("missing prerequisites:\n  " + "\n  ".join(missing))
+
+    versions = {"python": sys.executable, "mode": args.mode,
+                "tokenizer": str(tokenizer)}
+    for name in ("imageio", "piqa", "lpips", "accelerate", "diffusers"):
+        module = __import__(name)
+        versions[name] = getattr(module, "__version__", "ok")
+    print("STAGE2_RUNTIME=" + json.dumps(versions), flush=True)
+
+    command = [sys.executable, "-m", "accelerate.commands.accelerate_cli", "launch"]
+    if preset["processes"] > 1:
+        command += ["--multi_gpu"]
+    command += ["--num_processes", str(preset["processes"])]
+    command += [
+        "train_vgpt.py",
+        "--exp_name", preset["exp_name"],
+        "--dataset_path", str(preset["data_root"]),
+        "--oxe_data_mixes_type", preset["dataset"],
+        "--config_name", "configs/vgpt/ctx_llama_small.json",
+        # This is the tokenizer path; train_vgpt.py loads the tokenizer here and
+        # never the transformer, which comes from --resume_from_checkpoint.
+        "--pretrained_model_name_or_path", str(tokenizer),
+        "--action_ranges_path", str(ranges),
+        "--resume_from_checkpoint", str(SEED),
+        "--processor_type", "ctx_msp",
+        "--segment_length", "8",
+        "--per_device_train_batch_size", "1",
+        "--learning_rate", args.learning_rate,
+        "--max_train_steps", str(preset["max_train_steps"]),
+        "--output_dir", str(preset["output"]),
+        "--mixed_precision", "bf16",
+        "--no_aug",
+        "--dataloader_num_workers", "2",
+        "--log_steps", str(preset["log_steps"]),
+        "--max_eval_iters", "2",
+        "--validation_steps", str(preset["validation_steps"]),
+        "--checkpointing_steps", str(preset["checkpointing_steps"]),
+        "--max_generate_batchsize", "1",
+        "--max_decode_batchsize", "1",
+    ]
+    print("STAGE2_COMMAND=" + json.dumps(command), flush=True)
+    raise SystemExit(subprocess.call(command, cwd=REPO, env=os.environ.copy()))
+
+
+if __name__ == "__main__":
+    main()

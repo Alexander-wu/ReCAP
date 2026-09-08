@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, cite the ReCAP code release."
+title: "ReCAP: Training-Free Context Scheduling for Robot Video World Models"
+authors:
+  - name: "ReCAP contributors"
+version: 0.1.0
+date-released: 2026-09-09
+url: "https://github.com/Alexander-wu/ReCAP"
+repository-code: "https://github.com/Alexander-wu/ReCAP"
+license: Apache-2.0

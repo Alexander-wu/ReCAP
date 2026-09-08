@@ -1,0 +1,336 @@
+{
+  "selection_rule": {
+    "strong": "largest ReCAP minus Full Context mean-PSNR gain",
+    "representative": "case nearest the within-dataset median mean-PSNR gain",
+    "boundary": "smallest ReCAP minus Full Context mean-PSNR gain",
+    "selection_timing": "case windows fixed before inference; category chosen from all completed cases"
+  },
+  "selected": {
+    "strong": {
+      "rt1": {
+        "case_id": "train_eps_00000001",
+        "full_psnr_db": 20.087,
+        "recap_psnr_db": 22.497,
+        "psnr_gain_db": 2.41
+      },
+      "calvin": {
+        "case_id": "C12",
+        "full_psnr_db": 16.68,
+        "recap_psnr_db": 22.799,
+        "psnr_gain_db": 6.119
+      },
+      "libero": {
+        "case_id": "L062",
+        "full_psnr_db": 17.068,
+        "recap_psnr_db": 23.104,
+        "psnr_gain_db": 6.035999999999998
+      }
+    },
+    "representative": {
+      "rt1": {
+        "case_id": "train_eps_00000007",
+        "full_psnr_db": 20.04,
+        "recap_psnr_db": 21.5,
+        "psnr_gain_db": 1.4600000000000009
+      },
+      "calvin": {
+        "case_id": "C02",
+        "full_psnr_db": 17.371,
+        "recap_psnr_db": 21.244,
+        "psnr_gain_db": 3.873000000000001
+      },
+      "libero": {
+        "case_id": "L011",
+        "full_psnr_db": 15.647,
+        "recap_psnr_db": 15.975,
+        "psnr_gain_db": 0.3279999999999994
+      }
+    },
+    "boundary": {
+      "rt1": {
+        "case_id": "train_eps_00000052",
+        "full_psnr_db": 13.499,
+        "recap_psnr_db": 13.333,
+        "psnr_gain_db": -0.16600000000000037
+      },
+      "calvin": {
+        "case_id": "C10",
+        "full_psnr_db": 19.655,
+        "recap_psnr_db": 19.268,
+        "psnr_gain_db": -0.38700000000000045
+      },
+      "libero": {
+        "case_id": "L071",
+        "full_psnr_db": 18.677,
+        "recap_psnr_db": 17.654,
+        "psnr_gain_db": -1.0229999999999997
+      }
+    }
+  },
+  "all_cases": {
+    "rt1": [
+      {
+        "case_id": "train_eps_00000052",
+        "full_psnr_db": 13.499,
+        "recap_psnr_db": 13.333,
+        "psnr_gain_db": -0.16600000000000037
+      },
+      {
+        "case_id": "train_eps_00000023",
+        "full_psnr_db": 21.063,
+        "recap_psnr_db": 21.619,
+        "psnr_gain_db": 0.5560000000000009
+      },
+      {
+        "case_id": "train_eps_00000015",
+        "full_psnr_db": 21.444,
+        "recap_psnr_db": 22.069,
+        "psnr_gain_db": 0.625
+      },
+      {
+        "case_id": "train_eps_00000048",
+        "full_psnr_db": 22.412,
+        "recap_psnr_db": 23.146,
+        "psnr_gain_db": 0.7340000000000018
+      },
+      {
+        "case_id": "train_eps_00000007",
+        "full_psnr_db": 20.04,
+        "recap_psnr_db": 21.5,
+        "psnr_gain_db": 1.4600000000000009
+      },
+      {
+        "case_id": "train_eps_00000000",
+        "full_psnr_db": 23.194,
+        "recap_psnr_db": 24.736,
+        "psnr_gain_db": 1.5420000000000016
+      },
+      {
+        "case_id": "train_eps_00000049",
+        "full_psnr_db": 19.073,
+        "recap_psnr_db": 20.636,
+        "psnr_gain_db": 1.5629999999999988
+      },
+      {
+        "case_id": "train_eps_00000061",
+        "full_psnr_db": 18.334,
+        "recap_psnr_db": 20.459,
+        "psnr_gain_db": 2.125
+      },
+      {
+        "case_id": "train_eps_00000001",
+        "full_psnr_db": 20.087,
+        "recap_psnr_db": 22.497,
+        "psnr_gain_db": 2.41
+      }
+    ],
+    "calvin": [
+      {
+        "case_id": "C10",
+        "full_psnr_db": 19.655,
+        "recap_psnr_db": 19.268,
+        "psnr_gain_db": -0.38700000000000045
+      },
+      {
+        "case_id": "C05",
+        "full_psnr_db": 18.937,
+        "recap_psnr_db": 19.787,
+        "psnr_gain_db": 0.8499999999999979
+      },
+      {
+        "case_id": "C09",
+        "full_psnr_db": 20.246,
+        "recap_psnr_db": 21.152,
+        "psnr_gain_db": 0.9060000000000024
+      },
+      {
+        "case_id": "C14",
+        "full_psnr_db": 19.344,
+        "recap_psnr_db": 21.649,
+        "psnr_gain_db": 2.3049999999999997
+      },
+      {
+        "case_id": "C01",
+        "full_psnr_db": 20.644,
+        "recap_psnr_db": 23.556,
+        "psnr_gain_db": 2.9120000000000026
+      },
+      {
+        "case_id": "C13",
+        "full_psnr_db": 19.797,
+        "recap_psnr_db": 22.889,
+        "psnr_gain_db": 3.0919999999999987
+      },
+      {
+        "case_id": "C06",
+        "full_psnr_db": 18.234,
+        "recap_psnr_db": 21.852,
+        "psnr_gain_db": 3.6179999999999986
+      },
+      {
+        "case_id": "C02",
+        "full_psnr_db": 17.371,
+        "recap_psnr_db": 21.244,
+        "psnr_gain_db": 3.873000000000001
+      },
+      {
+        "case_id": "C03",
+        "full_psnr_db": 17.639,
+        "recap_psnr_db": 21.618,
+        "psnr_gain_db": 3.978999999999999
+      },
+      {
+        "case_id": "C07",
+        "full_psnr_db": 18.606,
+        "recap_psnr_db": 22.901,
+        "psnr_gain_db": 4.294999999999998
+      },
+      {
+        "case_id": "C15",
+        "full_psnr_db": 18.329,
+        "recap_psnr_db": 22.902,
+        "psnr_gain_db": 4.573
+      },
+      {
+        "case_id": "C16",
+        "full_psnr_db": 18.313,
+        "recap_psnr_db": 22.927,
+        "psnr_gain_db": 4.614000000000001
+      },
+      {
+        "case_id": "C08",
+        "full_psnr_db": 16.94,
+        "recap_psnr_db": 21.687,
+        "psnr_gain_db": 4.747
+      },
+      {
+        "case_id": "C04",
+        "full_psnr_db": 18.113,
+        "recap_psnr_db": 23.101,
+        "psnr_gain_db": 4.9879999999999995
+      },
+      {
+        "case_id": "C11",
+        "full_psnr_db": 17.798,
+        "recap_psnr_db": 23.028,
+        "psnr_gain_db": 5.23
+      },
+      {
+        "case_id": "C12",
+        "full_psnr_db": 16.68,
+        "recap_psnr_db": 22.799,
+        "psnr_gain_db": 6.119
+      }
+    ],
+    "libero": [
+      {
+        "case_id": "L071",
+        "full_psnr_db": 18.677,
+        "recap_psnr_db": 17.654,
+        "psnr_gain_db": -1.0229999999999997
+      },
+      {
+        "case_id": "L052",
+        "full_psnr_db": 14.32,
+        "recap_psnr_db": 13.56,
+        "psnr_gain_db": -0.7599999999999998
+      },
+      {
+        "case_id": "L031",
+        "full_psnr_db": 13.782,
+        "recap_psnr_db": 13.185,
+        "psnr_gain_db": -0.5969999999999995
+      },
+      {
+        "case_id": "L032",
+        "full_psnr_db": 14.276,
+        "recap_psnr_db": 13.856,
+        "psnr_gain_db": -0.41999999999999993
+      },
+      {
+        "case_id": "L051",
+        "full_psnr_db": 15.194,
+        "recap_psnr_db": 14.814,
+        "psnr_gain_db": -0.3800000000000008
+      },
+      {
+        "case_id": "L012",
+        "full_psnr_db": 16.056,
+        "recap_psnr_db": 15.94,
+        "psnr_gain_db": -0.11600000000000144
+      },
+      {
+        "case_id": "L042",
+        "full_psnr_db": 15.637,
+        "recap_psnr_db": 15.783,
+        "psnr_gain_db": 0.14599999999999902
+      },
+      {
+        "case_id": "L011",
+        "full_psnr_db": 15.647,
+        "recap_psnr_db": 15.975,
+        "psnr_gain_db": 0.3279999999999994
+      },
+      {
+        "case_id": "L021",
+        "full_psnr_db": 15.895,
+        "recap_psnr_db": 16.223,
+        "psnr_gain_db": 0.3279999999999994
+      },
+      {
+        "case_id": "L072",
+        "full_psnr_db": 18.256,
+        "recap_psnr_db": 18.649,
+        "psnr_gain_db": 0.3930000000000007
+      },
+      {
+        "case_id": "L041",
+        "full_psnr_db": 14.96,
+        "recap_psnr_db": 15.603,
+        "psnr_gain_db": 0.6429999999999989
+      },
+      {
+        "case_id": "L022",
+        "full_psnr_db": 16.166,
+        "recap_psnr_db": 17.217,
+        "psnr_gain_db": 1.0509999999999984
+      },
+      {
+        "case_id": "L081",
+        "full_psnr_db": 16.108,
+        "recap_psnr_db": 17.298,
+        "psnr_gain_db": 1.1899999999999977
+      },
+      {
+        "case_id": "L092",
+        "full_psnr_db": 21.121,
+        "recap_psnr_db": 22.711,
+        "psnr_gain_db": 1.5899999999999999
+      },
+      {
+        "case_id": "L082",
+        "full_psnr_db": 17.509,
+        "recap_psnr_db": 20.123,
+        "psnr_gain_db": 2.6140000000000008
+      },
+      {
+        "case_id": "L091",
+        "full_psnr_db": 21.228,
+        "recap_psnr_db": 25.153,
+        "psnr_gain_db": 3.924999999999997
+      },
+      {
+        "case_id": "L061",
+        "full_psnr_db": 17.77,
+        "recap_psnr_db": 23.664,
+        "psnr_gain_db": 5.894000000000002
+      },
+      {
+        "case_id": "L062",
+        "full_psnr_db": 17.068,
+        "recap_psnr_db": 23.104,
+        "psnr_gain_db": 6.035999999999998
+      }
+    ]
+  }
+}

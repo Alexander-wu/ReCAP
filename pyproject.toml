@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "recap-robot-video"
+version = "0.1.0"
+description = "Training-free context scheduling for long-horizon robot video world models"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+license = {file = "LICENSE"}
+authors = [{name = "ReCAP contributors"}]
+
+[project.urls]
+Repository = "https://github.com/Alexander-wu/ReCAP"
+Homepage = "https://alexander-wu.github.io/recap-project-page/"
+Issues = "https://github.com/Alexander-wu/ReCAP/issues"
+
+[project.optional-dependencies]
+inference = ["torch>=2.5,<3", "transformers==4.57.1", "diffusers==0.35.2", "numpy>=1.26,<3", "imageio==2.37.0", "Pillow>=10", "einops>=0.8", "accelerate==1.9.0", "safetensors>=0.4", "peft==0.17.1"]
+metrics = ["lpips==0.1.4", "piqa==1.3.2", "scipy>=1.11", "matplotlib>=3.8"]
+vllm = ["vllm==0.13.0"]
+assets = ["huggingface-hub>=0.34,<2"]
+dev = ["pytest>=8,<9", "build>=1.2", "numpy>=1.26,<3"]
+
+[project.scripts]
+recap = "recap.cli:main"
+
+[tool.setuptools]
+license-files = ["LICENSE", "NOTICE", "third_party/*LICENSE", "THIRD_PARTY_NOTICES.md"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+recap = ["reference/*.py", "reference/**/*.py"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

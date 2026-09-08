@@ -1,0 +1,5 @@
+* text=auto
+*.py text eol=lf
+*.json text eol=lf
+*.gif binary
+*.npz binary

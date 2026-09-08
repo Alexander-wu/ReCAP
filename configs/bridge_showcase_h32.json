@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "dataset": "bridge",
+  "backend": "bridge",
+  "observed_frames": 1,
+  "horizon": 32,
+  "arguments": [
+    "--action-ranges",
+    "{assets}/bridge/action_ranges.pth",
+    "--data-root",
+    "{data}",
+    "--world-model",
+    "{assets}/bridge_world",
+    "--tokenizer-model",
+    "{assets}/bridge_tokenizer",
+    "--output-dir",
+    "{output}",
+    "--cases",
+    "val_eps_00000033.npz",
+    "val_eps_00000008.npz",
+    "val_eps_00000024.npz"
+  ],
+  "notes": "Post-hoc high-gain qualitative selection; not aggregate evaluation."
+}

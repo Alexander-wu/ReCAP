@@ -1,0 +1,38 @@
+{
+  "cases": [
+    {
+      "dataset": "RT-1",
+      "case_id": "train_eps_00000061",
+      "frames": "<LOCAL_PATH>",
+      "gain": 0.019927
+    },
+    {
+      "dataset": "CALVIN",
+      "case_id": "C06",
+      "frames": "<LOCAL_PATH>",
+      "gain": 0.0395488
+    },
+    {
+      "dataset": "LIBERO-90",
+      "case_id": "L011",
+      "frames": "<LOCAL_PATH>",
+      "gain": 0.0168768
+    }
+  ],
+  "horizons": [
+    0,
+    16,
+    32,
+    48,
+    64
+  ],
+  "rows": [
+    "Ground truth",
+    "Full context",
+    "ReCAP"
+  ],
+  "figure_size_inches": [
+    9.2,
+    13.987
+  ]
+}

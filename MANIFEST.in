@@ -1,0 +1,11 @@
+include LICENSE NOTICE THIRD_PARTY_NOTICES.md CITATION.cff
+include weights_manifest.json SOURCE_PROVENANCE.json runtime_verified.json gallery.html
+recursive-include third_party *LICENSE
+recursive-include configs *.json
+recursive-include docs *.md *.json
+recursive-include tests *.py
+recursive-include scripts *.py
+recursive-include training *.py *.json *.txt *.md
+recursive-include model_cards *.md
+recursive-include artifacts *.csv *.json *.md *.gif *.txt
+global-exclude __pycache__ *.py[cod]

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "dataset": "bridge",
+  "backend": "bridge",
+  "observed_frames": 1,
+  "horizon": 32,
+  "arguments": [
+    "--action-ranges",
+    "{assets}/bridge/action_ranges.pth",
+    "--data-root",
+    "{data}",
+    "--world-model",
+    "{assets}/bridge_world",
+    "--tokenizer-model",
+    "{assets}/bridge_tokenizer",
+    "--output-dir",
+    "{output}"
+  ],
+  "notes": "Paper Bridge FP32 seed 20260906, top-k 100, temperature 1.0; first three eligible validation clips."
+}

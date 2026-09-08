@@ -1,0 +1,32 @@
+{
+  "dataset": "CALVIN",
+  "case": "C06",
+  "future_step": 64,
+  "layers": 12,
+  "heads_averaged_per_layer": 12,
+  "full_prompt_tokens": 7232,
+  "recap_prompt_tokens": 1931,
+  "full_layer_mean": {
+    "ctx_prefix": 0.1157818,
+    "anchor": 0.0137361,
+    "stale": 0.7146419,
+    "recent": 0.1558402
+  },
+  "recap_layer_mean": {
+    "ctx_prefix": 0.2819573,
+    "anchor": 0.0145336,
+    "stale": null,
+    "recent": 0.703509
+  },
+  "recent_delta_pp": 54.767,
+  "anchor_delta_pp": 0.08,
+  "color_scale": {
+    "name": "cmcrameri.devon_r",
+    "normalization": "PowerNorm gamma=0.58",
+    "range": [
+      0.0,
+      1.0
+    ]
+  },
+  "interpretation": "ReCAP redirects attention mass from stale history to recent states; scene-anchor attention is essentially unchanged at t=64."
+}

@@ -1,0 +1,43 @@
+{
+  "dataset": "RT-1",
+  "case_count": 9,
+  "horizons": [
+    8,
+    16,
+    32,
+    48,
+    64
+  ],
+  "paired": {
+    "lpips_auc_gain_full_minus_recap": {
+      "mean": 0.0201519,
+      "std": 0.0111025,
+      "ci95": [
+        0.0133531,
+        0.0271188
+      ],
+      "wins": 9,
+      "cases": 9
+    },
+    "ssim_auc_gain_recap_minus_full": {
+      "mean": 0.0207462,
+      "std": 0.0126565,
+      "ci95": [
+        0.013008,
+        0.0288506
+      ],
+      "wins": 9,
+      "cases": 9
+    },
+    "psnr_auc_gain_recap_minus_full": {
+      "mean": 1.1123082,
+      "std": 0.7353081,
+      "ci95": [
+        0.6669949,
+        1.5784116
+      ],
+      "wins": 8,
+      "cases": 9
+    }
+  }
+}

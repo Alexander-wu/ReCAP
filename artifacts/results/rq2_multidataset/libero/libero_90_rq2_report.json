@@ -1,0 +1,43 @@
+{
+  "dataset": "LIBERO-90",
+  "case_count": 18,
+  "horizons": [
+    8,
+    16,
+    32,
+    48,
+    64
+  ],
+  "paired": {
+    "lpips_auc_gain_full_minus_recap": {
+      "mean": 0.017347,
+      "std": 0.0122305,
+      "ci95": [
+        0.0120428,
+        0.0227614
+      ],
+      "wins": 18,
+      "cases": 18
+    },
+    "ssim_auc_gain_recap_minus_full": {
+      "mean": 0.0192245,
+      "std": 0.0105534,
+      "ci95": [
+        0.0144402,
+        0.0240775
+      ],
+      "wins": 18,
+      "cases": 18
+    },
+    "psnr_auc_gain_recap_minus_full": {
+      "mean": 0.8771103,
+      "std": 1.2032826,
+      "ci95": [
+        0.37378,
+        1.4476181
+      ],
+      "wins": 13,
+      "cases": 18
+    }
+  }
+}

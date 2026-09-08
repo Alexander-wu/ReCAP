@@ -1,0 +1,307 @@
+{
+  "dataset": "LIBERO-90",
+  "horizons": [
+    8,
+    16,
+    32,
+    48,
+    64
+  ],
+  "cases": 18,
+  "methods": [
+    "anchor_uniform",
+    "full_history",
+    "recap",
+    "repeat_frame",
+    "sliding_window_eq",
+    "stale_inject@k=2+src=generated",
+    "stale_inject@k=2+src=ground_truth",
+    "stale_inject@k=4+src=generated",
+    "stale_inject@k=4+src=ground_truth",
+    "stale_inject@k=6+src=generated",
+    "stale_inject@k=6+src=ground_truth"
+  ],
+  "budget_note": "full_history is an unbounded reference; sliding_window_eq, anchor_uniform, recap and every stale_inject variant share the same 1931-token block budget",
+  "proxy_note": "proxy_ndtw / proxy_arm_score / proxy_shape_iou come from heuristic pixel segmentation and are not calibrated kinematics",
+  "paired_vs_recap": {
+    "anchor_uniform": {
+      "cases": 18,
+      "lpips_auc_gain": {
+        "mean": 0.002084,
+        "std": 0.007665,
+        "ci95": [
+          -0.0012997,
+          0.005556
+        ],
+        "recap_wins": 7
+      },
+      "ssim_auc_gain": {
+        "mean": 0.003517,
+        "std": 0.0079404,
+        "ci95": [
+          0.0001436,
+          0.0072262
+        ],
+        "recap_wins": 10
+      }
+    },
+    "full_history": {
+      "cases": 18,
+      "lpips_auc_gain": {
+        "mean": 0.017347,
+        "std": 0.0122305,
+        "ci95": [
+          0.012058,
+          0.0228279
+        ],
+        "recap_wins": 18
+      },
+      "ssim_auc_gain": {
+        "mean": 0.0192245,
+        "std": 0.0105534,
+        "ci95": [
+          0.0144631,
+          0.024064
+        ],
+        "recap_wins": 18
+      }
+    },
+    "repeat_frame": {
+      "cases": 18,
+      "lpips_auc_gain": {
+        "mean": 0.0043849,
+        "std": 0.02049,
+        "ci95": [
+          -0.0047877,
+          0.0134309
+        ],
+        "recap_wins": 10
+      },
+      "ssim_auc_gain": {
+        "mean": 0.0094968,
+        "std": 0.0172705,
+        "ci95": [
+          0.0018613,
+          0.0172151
+        ],
+        "recap_wins": 11
+      }
+    },
+    "sliding_window_eq": {
+      "cases": 18,
+      "lpips_auc_gain": {
+        "mean": 0.0002929,
+        "std": 0.0026617,
+        "ci95": [
+          -0.0007146,
+          0.001597
+        ],
+        "recap_wins": 8
+      },
+      "ssim_auc_gain": {
+        "mean": 0.0008443,
+        "std": 0.002766,
+        "ci95": [
+          -0.0002033,
+          0.0022097
+        ],
+        "recap_wins": 9
+      }
+    },
+    "stale_inject@k=2+src=generated": {
+      "cases": 18,
+      "lpips_auc_gain": {
+        "mean": -2.3e-05,
+        "std": 0.000665,
+        "ci95": [
+          -0.0003217,
+          0.0002725
+        ],
+        "recap_wins": 5
+      },
+      "ssim_auc_gain": {
+        "mean": 0.0002488,
+        "std": 0.0007267,
+        "ci95": [
+          -5.66e-05,
+          0.0006021
+        ],
+        "recap_wins": 8
+      }
+    },
+    "stale_inject@k=2+src=ground_truth": {
+      "cases": 18,
+      "lpips_auc_gain": {
+        "mean": -0.0002727,
+        "std": 0.0012928,
+        "ci95": [
+          -0.0008326,
+          0.0003329
+        ],
+        "recap_wins": 5
+      },
+      "ssim_auc_gain": {
+        "mean": -0.0003845,
+        "std": 0.0017462,
+        "ci95": [
+          -0.0011026,
+          0.0004311
+        ],
+        "recap_wins": 5
+      }
+    },
+    "stale_inject@k=4+src=generated": {
+      "cases": 18,
+      "lpips_auc_gain": {
+        "mean": 0.0016297,
+        "std": 0.0043755,
+        "ci95": [
+          -0.0002786,
+          0.0037223
+        ],
+        "recap_wins": 8
+      },
+      "ssim_auc_gain": {
+        "mean": 0.00148,
+        "std": 0.0044076,
+        "ci95": [
+          -0.0004238,
+          0.0034943
+        ],
+        "recap_wins": 10
+      }
+    },
+    "stale_inject@k=4+src=ground_truth": {
+      "cases": 18,
+      "lpips_auc_gain": {
+        "mean": 0.0008624,
+        "std": 0.0049407,
+        "ci95": [
+          -0.0011499,
+          0.0031976
+        ],
+        "recap_wins": 8
+      },
+      "ssim_auc_gain": {
+        "mean": 0.000897,
+        "std": 0.0045308,
+        "ci95": [
+          -0.0009589,
+          0.0030407
+        ],
+        "recap_wins": 10
+      }
+    },
+    "stale_inject@k=6+src=generated": {
+      "cases": 18,
+      "lpips_auc_gain": {
+        "mean": 0.0108787,
+        "std": 0.0122646,
+        "ci95": [
+          0.0055537,
+          0.0165925
+        ],
+        "recap_wins": 15
+      },
+      "ssim_auc_gain": {
+        "mean": 0.0089126,
+        "std": 0.010392,
+        "ci95": [
+          0.0046445,
+          0.0138835
+        ],
+        "recap_wins": 13
+      }
+    },
+    "stale_inject@k=6+src=ground_truth": {
+      "cases": 18,
+      "lpips_auc_gain": {
+        "mean": -0.0009835,
+        "std": 0.0137707,
+        "ci95": [
+          -0.0070025,
+          0.0051341
+        ],
+        "recap_wins": 8
+      },
+      "ssim_auc_gain": {
+        "mean": -0.0006378,
+        "std": 0.0128702,
+        "ci95": [
+          -0.0064068,
+          0.0051973
+        ],
+        "recap_wins": 9
+      }
+    }
+  },
+  "stale_intervention": {
+    "generated@k=2": {
+      "cases": 18,
+      "lpips_h64_mean": 0.1664025,
+      "lpips_h64_ci95": [
+        0.1491765,
+        0.1839323
+      ],
+      "lpips_auc_mean": 0.1276837,
+      "ssim_h64_mean": 0.8256334,
+      "prompt_tokens_max": 1931
+    },
+    "generated@k=4": {
+      "cases": 18,
+      "lpips_h64_mean": 0.1696981,
+      "lpips_h64_ci95": [
+        0.1532249,
+        0.1865492
+      ],
+      "lpips_auc_mean": 0.1293364,
+      "ssim_h64_mean": 0.8228233,
+      "prompt_tokens_max": 1931
+    },
+    "generated@k=6": {
+      "cases": 18,
+      "lpips_h64_mean": 0.183231,
+      "lpips_h64_ci95": [
+        0.1697802,
+        0.1965591
+      ],
+      "lpips_auc_mean": 0.1385854,
+      "ssim_h64_mean": 0.8121122,
+      "prompt_tokens_max": 1931
+    },
+    "ground_truth@k=2": {
+      "cases": 18,
+      "lpips_h64_mean": 0.1661147,
+      "lpips_h64_ci95": [
+        0.1490185,
+        0.1832435
+      ],
+      "lpips_auc_mean": 0.127434,
+      "ssim_h64_mean": 0.8268368,
+      "prompt_tokens_max": 1931
+    },
+    "ground_truth@k=4": {
+      "cases": 18,
+      "lpips_h64_mean": 0.1691882,
+      "lpips_h64_ci95": [
+        0.1533069,
+        0.1857412
+      ],
+      "lpips_auc_mean": 0.1285691,
+      "ssim_h64_mean": 0.8229051,
+      "prompt_tokens_max": 1931
+    },
+    "ground_truth@k=6": {
+      "cases": 18,
+      "lpips_h64_mean": 0.1533945,
+      "lpips_h64_ci95": [
+        0.1433489,
+        0.1629048
+      ],
+      "lpips_auc_mean": 0.1267232,
+      "ssim_h64_mean": 0.8357856,
+      "prompt_tokens_max": 1931
+    }
+  },
+  "skipped": []
+}

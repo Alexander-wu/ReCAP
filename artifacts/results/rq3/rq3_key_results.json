@@ -1,0 +1,75 @@
+{
+  "status": "complete",
+  "protocol": {
+    "horizons": [8, 16, 32, 48, 64],
+    "window_w": 6,
+    "bounded_prompt_tokens": 1931,
+    "full_context_prompt_tokens_at_h64": 7232,
+    "datasets": {
+      "RT-1": {
+        "cases": 9,
+        "paired_lpips_auc": {
+          "full_history": {"mean": 0.0201543, "ci95": [0.0133859, 0.0269031], "recap_wins": 9, "cases": 9},
+          "sliding_window_eq": {"mean": -0.0004646, "ci95": [-0.0022128, 0.0013998], "recap_wins": 3, "cases": 9},
+          "anchor_uniform": {"mean": 0.0118385, "ci95": [0.0074103, 0.0158409], "recap_wins": 8, "cases": 9}
+        },
+        "stale_h64_lpips": {
+          "generated": {"2": 0.2042774, "4": 0.2151524, "6": 0.2367576},
+          "ground_truth": {"2": 0.2019289, "4": 0.21335, "6": 0.2120566}
+        }
+      },
+      "CALVIN": {
+        "cases": 16,
+        "paired_lpips_auc": {
+          "full_history": {"mean": 0.0328465, "ci95": [0.0242713, 0.0411285], "recap_wins": 16, "cases": 16},
+          "sliding_window_eq": {"mean": -0.0001908, "ci95": [-0.0014517, 0.0011962], "recap_wins": 7, "cases": 16},
+          "anchor_uniform": {"mean": 0.0172504, "ci95": [0.0114279, 0.0229839], "recap_wins": 16, "cases": 16}
+        },
+        "stale_h64_lpips": {
+          "generated": {"2": 0.1057978, "4": 0.115342, "6": 0.1539407},
+          "ground_truth": {"2": 0.1046011, "4": 0.1129697, "6": 0.1313916}
+        }
+      },
+      "LIBERO-90": {
+        "cases": 18,
+        "paired_lpips_auc": {
+          "full_history": {"mean": 0.017347, "ci95": [0.012058, 0.0228279], "recap_wins": 18, "cases": 18},
+          "sliding_window_eq": {"mean": 0.0002929, "ci95": [-0.0007146, 0.001597], "recap_wins": 8, "cases": 18},
+          "anchor_uniform": {"mean": 0.002084, "ci95": [-0.0012997, 0.005556], "recap_wins": 7, "cases": 18}
+        },
+        "stale_h64_lpips": {
+          "generated": {"2": 0.1664025, "4": 0.1696981, "6": 0.183231},
+          "ground_truth": {"2": 0.1661147, "4": 0.1691882, "6": 0.1533945}
+        }
+      }
+    }
+  },
+  "attention_probe": {
+    "dataset": "CALVIN",
+    "case": "C06",
+    "layers": 12,
+    "heads": 12,
+    "recent_attention_delta_pp": {
+      "8": 1.151,
+      "16": 21.253,
+      "32": 48.417,
+      "48": 56.236,
+      "64": 54.767
+    },
+    "anchor_attention_delta_pp": {
+      "8": -0.63,
+      "16": -1.87,
+      "32": -1.466,
+      "48": -0.795,
+      "64": 0.08
+    }
+  },
+  "interpretation": {
+    "primary": "Bounded contiguous recent context is the robust component across all three datasets.",
+    "anchor": "The anchor has no significant independent benefit over an equal-budget recent-only window in any dataset.",
+    "uniform_history": "Replacing the contiguous recent trajectory with uniform history is clearly harmful on RT-1 and CALVIN, but inconclusive on LIBERO-90.",
+    "stale_generated": "A high proportion of self-generated stale history consistently degrades H64 LPIPS across all datasets.",
+    "stale_real": "Matched-distance real stale history is dataset-dependent; temporal distance alone is not universally harmful.",
+    "attention": "At step 64, ReCAP reallocates 54.767 percentage points of attention mass toward recent states, while anchor attention changes by only +0.08 points."
+  }
+}
