@@ -15,7 +15,8 @@
         }
       ],
       "format": "diffusers",
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/rt1_tokenizer"
     },
     "rt1_world": {
       "files": [
@@ -46,7 +47,8 @@
         }
       ],
       "format": "huggingface",
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/rt1_world"
     },
     "calvin_tokenizer": {
       "files": [
@@ -62,7 +64,8 @@
         }
       ],
       "format": "diffusers",
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/calvin_tokenizer"
     },
     "calvin_world": {
       "files": [
@@ -93,7 +96,8 @@
         }
       ],
       "format": "huggingface",
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/calvin_world"
     },
     "libero_tokenizer": {
       "files": [
@@ -109,7 +113,8 @@
         }
       ],
       "format": "diffusers",
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/libero_tokenizer"
     },
     "libero_world": {
       "files": [
@@ -140,7 +145,8 @@
         }
       ],
       "format": "huggingface",
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/libero_world"
     },
     "bridge_tokenizer": {
       "files": [
@@ -156,7 +162,8 @@
         }
       ],
       "format": "diffusers",
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/bridge_tokenizer"
     },
     "bridge_world": {
       "files": [
@@ -187,7 +194,8 @@
         }
       ],
       "format": "huggingface",
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/bridge_world"
     },
     "calvin_action_ranges": {
       "files": [
@@ -202,7 +210,8 @@
           "bytes": 379
         }
       ],
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/calvin"
     },
     "libero_action_ranges": {
       "files": [
@@ -217,7 +226,8 @@
           "bytes": 384
         }
       ],
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/libero"
     },
     "bridge_action_ranges": {
       "files": [
@@ -232,7 +242,8 @@
           "bytes": 417
         }
       ],
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/bridge"
     },
     "rt1_action_ranges": {
       "files": [
@@ -247,7 +258,14 @@
           "sha256": "a55e18454996743ff27b4680ca21ba6bb8ff1731e7ab63935e5783215c492172"
         }
       ],
-      "published": false
+      "published": true,
+      "url": "https://huggingface.co/easylearning/recap-robot-models/tree/61f3c350349f58ba8619c2454b5fac5802756282/weights/rt1"
     }
+  },
+  "distribution": {
+    "repo_id": "easylearning/recap-robot-models",
+    "revision": "61f3c350349f58ba8619c2454b5fac5802756282",
+    "repo_type": "model",
+    "url": "https://huggingface.co/easylearning/recap-robot-models"
   }
 }

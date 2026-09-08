@@ -9,18 +9,25 @@ ReCAP adds no trained parameters. Inference needs a matched tokenizer, world mod
 | LIBERO-90 | [Card](libero_tokenizer.md) | [Card](libero_world.md) | `weights/libero/` |
 | Bridge V2 | [Card](bridge_tokenizer.md) | [Card](bridge_world.md) | `weights/bridge/` |
 
-The verified fine-tuned exports are prepared for separate Hugging Face hosting; upload is deferred to a subsequent release. **A public bundle URL has not yet been assigned.** The manifest contains no invented model ID. The official starting checkpoints are available at [RT-1 tokenizer](https://huggingface.co/thuml/rt1-compressive-tokenizer) and [RT-1 world model](https://huggingface.co/thuml/rt1-world-model-multi-step-rlvr); these do not replace dataset-specific fine-tuned checkpoints or their action ranges.
+All eight exports and their action ranges are publicly available in **[easylearning/recap-robot-models](https://huggingface.co/easylearning/recap-robot-models)**. The manifest pins immutable revision [`61f3c350349f`](https://huggingface.co/easylearning/recap-robot-models/commit/61f3c350349f58ba8619c2454b5fac5802756282) and preserves every published asset's SHA-256 and byte count. Public downloads require no Hugging Face login.
 
-Once a real bundle and revision are provided, download only your matched dataset assets:
+From the ReCAP checkout, download a matched dataset pair:
 
 ```bash
 python -m pip install -e '.[assets]'
-recap download --dataset calvin --root . --manifest weights_manifest.json \
-  --repo-id OWNER/PUBLISHED_BUNDLE --revision IMMUTABLE_COMMIT
+recap download --dataset calvin --root .
+```
+
+Choose `rt1`, `calvin`, `libero`, or `bridge`. The command downloads the tokenizer, world model and action-range files together and verifies all nine files immediately. Existing valid files are reused. To download and verify the full bundle:
+
+```bash
+for dataset in rt1 calvin libero bridge; do
+  recap download --dataset "$dataset" --root .
+done
 recap verify --root . --manifest weights_manifest.json
 ```
 
-`OWNER/PUBLISHED_BUNDLE` and `IMMUTABLE_COMMIT` are placeholders. Download verifies the selected dataset immediately; `recap verify` above checks the full manifest and requires all four datasets to be downloaded. Valid files are reused on subsequent downloads. An unpublished manifest without an explicit destination fails clearly rather than fetching substitute weights.
+The official starting checkpoints remain available at [RT-1 tokenizer](https://huggingface.co/thuml/rt1-compressive-tokenizer) and [RT-1 world model](https://huggingface.co/thuml/rt1-world-model-multi-step-rlvr). They are provenance references; use the matched fine-tuned pair and action ranges for each dataset.
 
 The resulting structure is `weights/calvin_tokenizer/`, `weights/calvin_world/`, `weights/calvin/action_ranges.pth` and `.json`, with analogous paths for the other datasets. Full model tensors are excluded from Git. All exports omit optimizer, discriminator and RNG states and are intended for inference, not training resume.
 

@@ -2,7 +2,7 @@
 
 **Training-free context scheduling for long-horizon robot video world models.**
 
-[Project page](https://alexander-wu.github.io/recap-project-page/) · [Experiments](docs/EXPERIMENTS.md) · [Data](docs/DATA.md) · [Weights](model_cards/README.md) · [Validation](docs/VALIDATION.md)
+[Project page](https://alexander-wu.github.io/recap-project-page/) · [Experiments](docs/EXPERIMENTS.md) · [Data](docs/DATA.md) · [Weights](https://huggingface.co/easylearning/recap-robot-models) · [Validation](docs/VALIDATION.md)
 
 ReCAP keeps the static visual context, the first dynamic visual–action block, and the most recent **W** complete blocks. It runs on a frozen autoregressive world model, using generated tokens directly. With W=6, the reference model's prompt stays within **1,931 tokens** throughout the rollout.
 
@@ -37,7 +37,7 @@ Bridge uses the Hugging Face backend. The [environment guide](docs/ENVIRONMENT.m
 
 ## Run a paired comparison
 
-1. Obtain the matched **tokenizer + world model + action ranges** for your dataset using the [weight instructions](model_cards/README.md). ReCAP adds no weights of its own.
+1. Download the matched **tokenizer + world model + action ranges** from [Hugging Face](https://huggingface.co/easylearning/recap-robot-models) using `recap download --dataset calvin --root .` (install `.[assets]` first). This verifies a pinned checkpoint revision. ReCAP adds no weights of its own. See [all dataset choices](model_cards/README.md).
 2. Convert an episode according to [the data contract](docs/DATA.md). H64 recipes read `episode.npz` containing at least 66 aligned image/action frames.
 3. Inspect the command, then run it in a new output directory:
 

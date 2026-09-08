@@ -1,0 +1,230 @@
+{
+  "repo_id": "easylearning/recap-robot-models",
+  "revision": "61f3c350349f58ba8619c2454b5fac5802756282",
+  "public": true,
+  "files_verified": 36,
+  "checks": [
+    {
+      "path": "weights/rt1_tokenizer/config.json",
+      "bytes": 844,
+      "sha256": "9739df1c8157400c8efc54e67370f1e6be9db074c059ef25b26e475fc0fe9d9d",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/rt1_tokenizer/diffusion_pytorch_model.safetensors",
+      "bytes": 517850360,
+      "sha256": "7c8194f83617137ef0a002a15d60c6ee222bcd2442afb4ed704a7918496cc073",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/rt1_world/config.json",
+      "bytes": 701,
+      "sha256": "b9ab9946cea336e363eddd4fe695dab937bd7e4d83013443bb22691fa6b8e7ff",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/rt1_world/generation_config.json",
+      "bytes": 139,
+      "sha256": "d4e800de4276bb1c5314e67aba53e8eba922ff37bfc1654e8fbdb70d81538a80",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/rt1_world/tokenizer.json",
+      "bytes": 9085528,
+      "sha256": "d8e66d2ed8ba80929af0d0d120ab7b3dcadd7aeb0ab852d3cb82fa510d664f77",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/rt1_world/tokenizer_config.json",
+      "bytes": 50396,
+      "sha256": "157b63a78bcc6f9cb1ed0200699da0f823f2689e394be40e6b41e6d54aadde30",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/rt1_world/model.safetensors",
+      "bytes": 508419048,
+      "sha256": "b546fb543a824fdd899aaf5fbd962fb59e38dc34d21e74f3632f397664df3d4b",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/calvin_tokenizer/config.json",
+      "bytes": 894,
+      "sha256": "9169cf92bb7a9055eb6a539fee2aaa1dee6836ab6882dc1dd8c037adb152d010",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/calvin_tokenizer/diffusion_pytorch_model.safetensors",
+      "bytes": 517850360,
+      "sha256": "11a8a6ec568a87c48ce455c7f30eb95f04c4acd9e980d14bdd9a8d19c2f4179f",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/calvin_world/config.json",
+      "bytes": 701,
+      "sha256": "b9ab9946cea336e363eddd4fe695dab937bd7e4d83013443bb22691fa6b8e7ff",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/calvin_world/generation_config.json",
+      "bytes": 139,
+      "sha256": "d4e800de4276bb1c5314e67aba53e8eba922ff37bfc1654e8fbdb70d81538a80",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/calvin_world/tokenizer.json",
+      "bytes": 9085528,
+      "sha256": "d8e66d2ed8ba80929af0d0d120ab7b3dcadd7aeb0ab852d3cb82fa510d664f77",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/calvin_world/tokenizer_config.json",
+      "bytes": 50396,
+      "sha256": "157b63a78bcc6f9cb1ed0200699da0f823f2689e394be40e6b41e6d54aadde30",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/calvin_world/model.safetensors",
+      "bytes": 508419080,
+      "sha256": "fe8a7d41ddc09c29730318c33f516e5867d7fae32bca45d085bc98c8dfce878d",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/libero_tokenizer/config.json",
+      "bytes": 894,
+      "sha256": "9169cf92bb7a9055eb6a539fee2aaa1dee6836ab6882dc1dd8c037adb152d010",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/libero_tokenizer/diffusion_pytorch_model.safetensors",
+      "bytes": 517850360,
+      "sha256": "cb619c6b4b83c3b3bbb1a1139919207e40aa61864e40266d88564a690fbea135",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/libero_world/config.json",
+      "bytes": 701,
+      "sha256": "b9ab9946cea336e363eddd4fe695dab937bd7e4d83013443bb22691fa6b8e7ff",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/libero_world/generation_config.json",
+      "bytes": 139,
+      "sha256": "d4e800de4276bb1c5314e67aba53e8eba922ff37bfc1654e8fbdb70d81538a80",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/libero_world/tokenizer.json",
+      "bytes": 9085528,
+      "sha256": "d8e66d2ed8ba80929af0d0d120ab7b3dcadd7aeb0ab852d3cb82fa510d664f77",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/libero_world/tokenizer_config.json",
+      "bytes": 50396,
+      "sha256": "157b63a78bcc6f9cb1ed0200699da0f823f2689e394be40e6b41e6d54aadde30",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/libero_world/model.safetensors",
+      "bytes": 508419080,
+      "sha256": "35919877c619977544f247e72ef45de92354dba6fb1f9ecebab680319fa3b683",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/bridge_tokenizer/config.json",
+      "bytes": 894,
+      "sha256": "9169cf92bb7a9055eb6a539fee2aaa1dee6836ab6882dc1dd8c037adb152d010",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/bridge_tokenizer/diffusion_pytorch_model.safetensors",
+      "bytes": 517850360,
+      "sha256": "097710453149da3274c1eaf6213f742a93afb0535b02219ddbfb413e2fca87a7",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/bridge_world/config.json",
+      "bytes": 701,
+      "sha256": "b9ab9946cea336e363eddd4fe695dab937bd7e4d83013443bb22691fa6b8e7ff",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/bridge_world/generation_config.json",
+      "bytes": 139,
+      "sha256": "d4e800de4276bb1c5314e67aba53e8eba922ff37bfc1654e8fbdb70d81538a80",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/bridge_world/tokenizer.json",
+      "bytes": 9085528,
+      "sha256": "d8e66d2ed8ba80929af0d0d120ab7b3dcadd7aeb0ab852d3cb82fa510d664f77",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/bridge_world/tokenizer_config.json",
+      "bytes": 50396,
+      "sha256": "157b63a78bcc6f9cb1ed0200699da0f823f2689e394be40e6b41e6d54aadde30",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/bridge_world/model.safetensors",
+      "bytes": 508419080,
+      "sha256": "09459b30bc290aab273acdd97015272b1bc67bb7051a282c1e0bf7465dde7ba1",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/calvin/action_ranges.pth",
+      "bytes": 1683,
+      "sha256": "98bfcb102bd139325e588eee068c9f55f0c7381f5860b5496c9ac94a32da3ca2",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/calvin/action_ranges.json",
+      "bytes": 379,
+      "sha256": "44cc6ed89ed9062b26bc661bf5268ab441032e9e6c7b6504c07e404c727868b2",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/libero/action_ranges.pth",
+      "bytes": 1683,
+      "sha256": "0c2808564d60e3b90aade2a940caa8545c1470c4114494d5e1eea526649c93c1",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/libero/action_ranges.json",
+      "bytes": 384,
+      "sha256": "c1b538f2f612ce19da739c386363295a9154f658a1d56652783e3a45fef219bd",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/bridge/action_ranges.pth",
+      "bytes": 829,
+      "sha256": "4492b53758cea8b3d4cb01e01ddf32d9d4bf31095fb3ca768a2d3ff631be8b15",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/bridge/action_ranges.json",
+      "bytes": 417,
+      "sha256": "b1007fb34e07e9f5a67676dd31b972a918ca1702ee28b3aaaadf44874f74bb85",
+      "method": "anonymous file download SHA-256"
+    },
+    {
+      "path": "weights/rt1/action_ranges.pth",
+      "bytes": 1274,
+      "sha256": "7b22a29492c55958ab63b16c91a6825b0c844e06afb4107f6fccf8f3d437db60",
+      "method": "Hub LFS SHA-256"
+    },
+    {
+      "path": "weights/rt1/action_ranges.json",
+      "bytes": 436,
+      "sha256": "a55e18454996743ff27b4680ca21ba6bb8ff1731e7ab63935e5783215c492172",
+      "method": "anonymous file download SHA-256"
+    }
+  ],
+  "anonymous_download": {
+    "dataset": "rt1",
+    "files_verified": 9,
+    "seconds": 114.2
+  },
+  "checked_bytes": 4141635395
+}

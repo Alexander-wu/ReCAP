@@ -26,6 +26,14 @@ python scripts/validate_checkpoints.py --root ASSET_BUNDLE_ROOT \
   --manifest weights_manifest.json --output checkpoint_validation.json
 ```
 
+## Public Hugging Face release
+
+The complete bundle is public at [easylearning/recap-robot-models](https://huggingface.co/easylearning/recap-robot-models), with asset revision `61f3c350349f58ba8619c2454b5fac5802756282`.
+
+- All **36 asset files** match their expected byte counts and SHA-256 values on the Hub. Large files use Hub LFS SHA-256 metadata; ordinary files were downloaded anonymously and hashed.
+- A fresh anonymous download of the complete RT-1 tokenizer/world-model/action-range pair succeeded through the release downloader; all **nine files** passed integrity verification.
+- Machine-readable results: [hf_public_verification.json](hf_public_verification.json).
+
 ## Historical evidence and remaining limits
 
 Archived experiment outputs come from the original reference scripts. Earlier preparation checked reference entry-point imports on the existing H20 runtime. These checks do not establish that a fresh CUDA environment exactly reproduces all recorded rollouts or timings.
