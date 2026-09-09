@@ -31,8 +31,4 @@ The official starting checkpoints remain available at [RT-1 tokenizer](https://h
 
 The resulting structure is `weights/calvin_tokenizer/`, `weights/calvin_world/`, `weights/calvin/action_ranges.pth` and `.json`, with analogous paths for the other datasets. Full model tensors are excluded from Git. All exports omit optimizer, discriminator and RNG states and are intended for inference, not training resume.
 
-## Maintainer publication
-
-`scripts/publish_weights.py --root RELEASE_ROOT --manifest weights_manifest.json --repo-id OWNER/BUNDLE` verifies the exact bundle and prints a plan. Add `--upload` after authenticating with `hf auth login` on the machine containing the exports. It uploads only manifest-listed assets, reviewed model cards and license files, and prints the resulting commit. Record that immutable commit under `distribution.repo_id` / `distribution.revision` in the manifest before advertising the default download command.
-
 Checkpoint exports retain MIT starting-model terms. New ReCAP source code uses Apache-2.0; dataset terms remain with each data publisher. See [third-party notices](../THIRD_PARTY_NOTICES.md).

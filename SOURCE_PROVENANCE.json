@@ -1200,8 +1200,8 @@
     "source_file": "eval_runenv.py",
     "upstream_commit": "not recovered",
     "preparation_sha256": "220742d367aa8b4e78ae93e34902c58b7e73d88e517d2d89a2eda91512d51365",
-    "included_in_release": true,
-    "release_sha256": "220742d367aa8b4e78ae93e34902c58b7e73d88e517d2d89a2eda91512d51365"
+    "included_in_release": false,
+    "exclusion_reason": "Upstream RT-1 policy/environment demonstration; outside the released recorded-action rollout protocol."
   },
   {
     "file": "training/eval_vgpt_multiturn.py",
@@ -1209,8 +1209,8 @@
     "source_file": "eval_vgpt_multiturn.py",
     "upstream_commit": "not recovered",
     "preparation_sha256": "202a9cc07a4e3fc4e7c37fbcd41c9df9a437e961516629e30bd223f76012acf7",
-    "included_in_release": true,
-    "release_sha256": "202a9cc07a4e3fc4e7c37fbcd41c9df9a437e961516629e30bd223f76012acf7"
+    "included_in_release": false,
+    "exclusion_reason": "Legacy upstream multi-turn evaluation entry with no current recipe or imported consumer."
   },
   {
     "file": "training/eval_vgpt.py",
@@ -1218,8 +1218,8 @@
     "source_file": "eval_vgpt.py",
     "upstream_commit": "not recovered",
     "preparation_sha256": "b694c0377297ba0adc0a8469943c7061a924a8d00af0c2125ae021f4c307733e",
-    "included_in_release": true,
-    "release_sha256": "b694c0377297ba0adc0a8469943c7061a924a8d00af0c2125ae021f4c307733e"
+    "included_in_release": false,
+    "exclusion_reason": "Legacy upstream standalone evaluation entry; public recipes use recap/reference/infer_compare.py and bridge_pair.py."
   },
   {
     "file": "training/transform_vgpt_checkpoint.py",
@@ -1227,8 +1227,8 @@
     "source_file": "transform_vgpt_checkpoint.py",
     "upstream_commit": "not recovered",
     "preparation_sha256": "835dfd584a7ac6ae505ef163151d12ab4cbe0dec6a8b542c937c1401e2a468b4",
-    "included_in_release": true,
-    "release_sha256": "835dfd584a7ac6ae505ef163151d12ab4cbe0dec6a8b542c937c1401e2a468b4"
+    "included_in_release": false,
+    "exclusion_reason": "Legacy export helper called only by removed evaluation entries; assumes an unbundled dummy tokenizer directory."
   },
   {
     "file": "training/train_vgpt_finetune.py",
@@ -1254,8 +1254,8 @@
     "source_file": "rt1_inference.py",
     "upstream_commit": "not recovered",
     "preparation_sha256": "278412eb4a0b0e60045387e88f6199cae77181a898d988dab385e6f7ee8ae3c1",
-    "included_in_release": true,
-    "release_sha256": "278412eb4a0b0e60045387e88f6199cae77181a898d988dab385e6f7ee8ae3c1"
+    "included_in_release": false,
+    "exclusion_reason": "TensorFlow RT-1 policy wrapper referenced only by the removed environment demonstration."
   },
   {
     "file": "training/train_tokenizer.py",
@@ -1263,8 +1263,8 @@
     "source_file": "train_tokenizer.py",
     "upstream_commit": "not recovered",
     "preparation_sha256": "9887e54419a803f43a7fa430fffa9b904f00cd23a781a8a247780b14a50f9055",
-    "included_in_release": true,
-    "release_sha256": "9887e54419a803f43a7fa430fffa9b904f00cd23a781a8a247780b14a50f9055"
+    "included_in_release": false,
+    "exclusion_reason": "Standalone non-compressive CNN tokenizer trainer; released adaptation uses train_ctx_tokenizer.py."
   },
   {
     "file": "training/train_ctx_tokenizer.py",
@@ -1425,8 +1425,8 @@
     "source_file": "configs/ctx_vae64/config.json",
     "upstream_commit": "not recovered",
     "preparation_sha256": "b39c115b98b4118081c862a90c019e6e79d47382c552997ed94df196bd756fb2",
-    "included_in_release": true,
-    "release_sha256": "b39c115b98b4118081c862a90c019e6e79d47382c552997ed94df196bd756fb2"
+    "included_in_release": false,
+    "exclusion_reason": "Unused 64-pixel tokenizer configuration; released preprocessing and trainer use 256-pixel configuration."
   },
   {
     "file": "training/configs/vgpt/llama.json",
@@ -1434,8 +1434,8 @@
     "source_file": "configs/vgpt/llama.json",
     "upstream_commit": "not recovered",
     "preparation_sha256": "fe3948fb0aed7ac776d89b23f3478187bfd0005754acc967c06222b8a15de277",
-    "included_in_release": true,
-    "release_sha256": "fe3948fb0aed7ac776d89b23f3478187bfd0005754acc967c06222b8a15de277"
+    "included_in_release": false,
+    "exclusion_reason": "Unused 24-layer, 4633-token configuration outside the released 12-layer, 9008-token architecture."
   },
   {
     "file": "training/configs/vgpt/ctx_llama_small.json",

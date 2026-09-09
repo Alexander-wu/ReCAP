@@ -53,8 +53,8 @@
     },
     {
       "path": "SOURCE_PROVENANCE.json",
-      "bytes": 71730,
-      "sha256": "931245609fdb6153bcef2790eddcafaca5b1f09c30857d18aeb2e517705371b2"
+      "bytes": 72046,
+      "sha256": "7575924a48783075f59ee2012c161481a7ef1077dc6dc6ef8732efeefdf84922"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -547,11 +547,6 @@
       "sha256": "c1f58711178572dd3143c9dac1035d07ab4bdb47e33000f261cee1005e24eb94"
     },
     {
-      "path": "docs/RELEASE_STATUS.md",
-      "bytes": 1035,
-      "sha256": "8b57b3ee96df903c842db422729c2d8513871cf6283de7d5f4f7ffe0f2b2bbbc"
-    },
-    {
       "path": "docs/REPRODUCE.md",
       "bytes": 6726,
       "sha256": "6d434f8b6b463eb8396f4d3c9db72d60c701d94bc428bc8020da2a39084a6007"
@@ -598,8 +593,8 @@
     },
     {
       "path": "model_cards/README.md",
-      "bytes": 3112,
-      "sha256": "7d476ed45dab0b078118f37a6594276b63121d8a5dba2044e7fbcedd95abbf54"
+      "bytes": 2576,
+      "sha256": "0446666a77dc1489beee2090dd183f214831c6f6ce9988d7188e18d99ef143c7"
     },
     {
       "path": "model_cards/bridge_tokenizer.md",
@@ -665,11 +660,6 @@
       "path": "scripts/preview_cases.py",
       "bytes": 1120,
       "sha256": "6fd3c43b24cb7e8f1cdbbf941a0580684f3d57246629d13a0ae7a7b19167331c"
-    },
-    {
-      "path": "scripts/publish_weights.py",
-      "bytes": 2229,
-      "sha256": "d88c92ed7af6881150593c463ea69f7b89cbc7581a32adbaeb8f0b732d0fff6c"
     },
     {
       "path": "scripts/validate_checkpoints.py",
@@ -863,8 +853,8 @@
     },
     {
       "path": "training/README.md",
-      "bytes": 1340,
-      "sha256": "0d182531ccd4941501986deb6065a0b03f03fa23da51dc7d21f4b98a2f991395"
+      "bytes": 1633,
+      "sha256": "21b17ef008de02e7d36349d83100922c75cd8c52717bafe1913341cfa97081b9"
     },
     {
       "path": "training/adaptation/convert_bridge.py",
@@ -917,39 +907,14 @@
       "sha256": "c36506df6b0b64e7c4b215e814ea205d5c7cc620d7e88550b456e4cff79bd4a8"
     },
     {
-      "path": "training/configs/ctx_vae64/config.json",
-      "bytes": 858,
-      "sha256": "b39c115b98b4118081c862a90c019e6e79d47382c552997ed94df196bd756fb2"
-    },
-    {
       "path": "training/configs/vgpt/ctx_llama_small.json",
       "bytes": 575,
       "sha256": "9b8aaf4bec3060e597674e7aa5b0180b624c5df5f46cf5695d81d3aba2be652b"
     },
     {
-      "path": "training/configs/vgpt/llama.json",
-      "bytes": 576,
-      "sha256": "fe3948fb0aed7ac776d89b23f3478187bfd0005754acc967c06222b8a15de277"
-    },
-    {
       "path": "training/configs/vgpt/llama_small.json",
       "bytes": 575,
       "sha256": "83d107836ff089e422a6cf724bbc620740b0f0ca5c8f65f579c788e26afa663e"
-    },
-    {
-      "path": "training/eval_runenv.py",
-      "bytes": 23946,
-      "sha256": "220742d367aa8b4e78ae93e34902c58b7e73d88e517d2d89a2eda91512d51365"
-    },
-    {
-      "path": "training/eval_vgpt.py",
-      "bytes": 25841,
-      "sha256": "b694c0377297ba0adc0a8469943c7061a924a8d00af0c2125ae021f4c307733e"
-    },
-    {
-      "path": "training/eval_vgpt_multiturn.py",
-      "bytes": 27606,
-      "sha256": "202a9cc07a4e3fc4e7c37fbcd41c9df9a437e961516629e30bd223f76012acf7"
     },
     {
       "path": "training/ivideogpt/ctx_tokenizer/__init__.py",
@@ -1052,19 +1017,9 @@
       "sha256": "6202f33b0a7de429220d8aac2d13631128746a45676b6b0edd148deea7125bfe"
     },
     {
-      "path": "training/rt1_inference.py",
-      "bytes": 14840,
-      "sha256": "278412eb4a0b0e60045387e88f6199cae77181a898d988dab385e6f7ee8ae3c1"
-    },
-    {
       "path": "training/train_ctx_tokenizer.py",
       "bytes": 54262,
       "sha256": "eeafe46e71610ac9b0866b60b980c68878775427d16ae33c658f0ca84218c75e"
-    },
-    {
-      "path": "training/train_tokenizer.py",
-      "bytes": 49295,
-      "sha256": "9887e54419a803f43a7fa430fffa9b904f00cd23a781a8a247780b14a50f9055"
     },
     {
       "path": "training/train_vgpt.py",
@@ -1075,11 +1030,6 @@
       "path": "training/train_vgpt_finetune.py",
       "bytes": 35278,
       "sha256": "524a2d1d83dee19e55701a2b40f2a314868138ba6832c605886b04f440276dc0"
-    },
-    {
-      "path": "training/transform_vgpt_checkpoint.py",
-      "bytes": 21446,
-      "sha256": "835dfd584a7ac6ae505ef163151d12ab4cbe0dec6a8b542c937c1401e2a468b4"
     },
     {
       "path": "weights_manifest.json",
