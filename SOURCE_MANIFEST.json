@@ -33,8 +33,8 @@
     },
     {
       "path": "MANIFEST.in",
-      "bytes": 494,
-      "sha256": "7aee706194628517797e927ce67686888cb4e3b2f74e7bd3d066a4ab96b6f049"
+      "bytes": 506,
+      "sha256": "99558c130ff9cb5ba7549c804567e6f73dfed7964a9805f4f5d846813bf6ff7e"
     },
     {
       "path": "NOTICE",
@@ -43,8 +43,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6398,
-      "sha256": "512b605f1054a65fbf3366d37a82fc23185eb6e1e9d1a99075e6ff41113b502e"
+      "bytes": 4701,
+      "sha256": "6c095f4926b2a2b197fe317b8d2486b506bf4895df10837d65559c5aae3ddcfc"
     },
     {
       "path": "SECURITY.md",
@@ -53,8 +53,8 @@
     },
     {
       "path": "SOURCE_PROVENANCE.json",
-      "bytes": 70791,
-      "sha256": "becac667101857dd247fb0cbcd3a2cb09142d5a48f5b7cff5fb4be115a510511"
+      "bytes": 71730,
+      "sha256": "931245609fdb6153bcef2790eddcafaca5b1f09c30857d18aeb2e517705371b2"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -533,8 +533,8 @@
     },
     {
       "path": "docs/DATA.md",
-      "bytes": 3640,
-      "sha256": "c2cf0777967027d86a5bd7dceff6c2fd2a5bdff7c95bc8d6937773a386406e7f"
+      "bytes": 3768,
+      "sha256": "c657e53e35141063bdaa34f55a756e981c6c94e3559484bfc813932c682a405b"
     },
     {
       "path": "docs/ENVIRONMENT.md",
@@ -552,9 +552,34 @@
       "sha256": "8b57b3ee96df903c842db422729c2d8513871cf6283de7d5f4f7ffe0f2b2bbbc"
     },
     {
+      "path": "docs/REPRODUCE.md",
+      "bytes": 6726,
+      "sha256": "6d434f8b6b463eb8396f4d3c9db72d60c701d94bc428bc8020da2a39084a6007"
+    },
+    {
+      "path": "docs/SCHEDULER.md",
+      "bytes": 1939,
+      "sha256": "3547c59c06aabfe40955d699833a8fa6f817e07e30a2f722a2083c31e4684af3"
+    },
+    {
       "path": "docs/VALIDATION.md",
       "bytes": 3284,
       "sha256": "87ad174e4d3a91da76ff1aeec1f75d99f76e9bb9bc48db8390f61538940fa38f"
+    },
+    {
+      "path": "docs/assets/README.md",
+      "bytes": 1167,
+      "sha256": "8599155e805dcb4373a136ba09b18090d9ad75014a52c9a9305b56008ea7f609"
+    },
+    {
+      "path": "docs/assets/method.jpg",
+      "bytes": 1178450,
+      "sha256": "dbc16c3513d817cf45f5b16b1ac17d75d50c963c143ae923d90c4d579cd35eca"
+    },
+    {
+      "path": "docs/assets/teaser.png",
+      "bytes": 722623,
+      "sha256": "2a595fff6538e436c941943444bd7f9d291f169a5f61b1889df859c2c865e259"
     },
     {
       "path": "docs/checkpoint_validation.json",

@@ -1,5 +1,7 @@
 # Data and protocol contracts
 
+For a step-by-step CALVIN conversion and first rollout, start with the [reproduction guide](REPRODUCE.md#prepare-calvin-data).
+
 Inputs contain `image: uint8[T,256,320,3]` and finite `action: float32[T,13]`. Use converted episodes and their original split manifests. No cross-episode sampling; fit action ranges on the training split only. Do not use object-array pickles in NPZ inputs.
 
 | Dataset | Action conversion | Protocol |

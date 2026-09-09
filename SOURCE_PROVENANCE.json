@@ -1463,5 +1463,25 @@
     "preparation_sha256": "c36506df6b0b64e7c4b215e814ea205d5c7cc620d7e88550b456e4cff79bd4a8",
     "included_in_release": true,
     "release_sha256": "c36506df6b0b64e7c4b215e814ea205d5c7cc620d7e88550b456e4cff79bd4a8"
+  },
+  {
+    "file": "docs/assets/method.jpg",
+    "source_group": "recap-manuscript-figures",
+    "source_file": "Figures/ReCAP(7).jpg",
+    "original_sha256": "dbc16c3513d817cf45f5b16b1ac17d75d50c963c143ae923d90c4d579cd35eca",
+    "modified": false,
+    "preparation_sha256": "dbc16c3513d817cf45f5b16b1ac17d75d50c963c143ae923d90c4d579cd35eca",
+    "included_in_release": true,
+    "release_sha256": "dbc16c3513d817cf45f5b16b1ac17d75d50c963c143ae923d90c4d579cd35eca"
+  },
+  {
+    "file": "docs/assets/teaser.png",
+    "source_group": "recap-manuscript-figures",
+    "source_file": "Figures/ReCAP_Intro.png",
+    "original_sha256": "2a595fff6538e436c941943444bd7f9d291f169a5f61b1889df859c2c865e259",
+    "modified": false,
+    "preparation_sha256": "2a595fff6538e436c941943444bd7f9d291f169a5f61b1889df859c2c865e259",
+    "included_in_release": true,
+    "release_sha256": "2a595fff6538e436c941943444bd7f9d291f169a5f61b1889df859c2c865e259"
   }
 ]
